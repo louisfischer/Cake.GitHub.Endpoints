@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>Cake.GitHub.Endpoints</AssemblyName>
     <AssemblyVersion>0.0.1.0</AssemblyVersion>
     <GenerateAssemblyVersionAttribute>true</GenerateAssemblyVersionAttribute>
@@ -18,8 +18,20 @@
     <NoWarn>$(NoWarn);NU5048</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <TreatSpecificWarningsAsErrors />
-	  <Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>11</LangVersion>
+    <NoWarn>$(NoWarn);NU5048;CS8032</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SourceRoot Include="$(MSBuildThisFileDirectory)/" />
+  </ItemGroup>
 
   <PropertyGroup>
     <PackageId>Cake.GitHub.Endpoints</PackageId>
@@ -41,6 +53,7 @@
   <ItemGroup>
     <PackageReference Include="Cake.Common" Version="3.0.0" PrivateAssets="All" />
     <PackageReference Include="Cake.Core" Version="3.0.0" PrivateAssets="All" />
+    <PackageReference Include="Costura.Fody" Version="5.8.0-alpha0098" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     <PackageReference Include="JWT" Version="10.0.2" />
     <PackageReference Include="Octokit" Version="5.1.0" />

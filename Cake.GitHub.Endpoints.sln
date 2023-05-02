@@ -3,12 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.GitHub.Endpoints", "src\Cake.GitHub.Endpoints.csproj", "{C9CE6605-ED83-4111-B229-4840BBA788DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.GitHub.Endpoints", "src\Cake.GitHub.Endpoints\Cake.GitHub.Endpoints.csproj", "{C9CE6605-ED83-4111-B229-4840BBA788DD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D4689364-2A99-4909-99C3-2287C4399E4D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{D4689364-2A99-4909-99C3-2287C4399E4D}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
 		build.cake = build.cake
+		.github\workflows\build.yml = .github\workflows\build.yml
+		cake.config = cake.config
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject

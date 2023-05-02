@@ -87,7 +87,7 @@ public static class GitHubEndpointsReferenceAliases
     /// "heads/main" or "tags/release-1") <br /><br />
     /// API: <see href="http://developer.github.com/v3/git/refs/#delete-a-reference">http://developer.github.com/v3/git/refs/#delete-a-reference</see>
     /// </remarks>
-    public static System.Threading.Tasks.Task GitHubReferenceDelete(this IGitHubEndpointContext context, string reference)
+    public static Task GitHubReferenceDelete(this IGitHubEndpointContext context, string reference)
     {
         if (context == null) throw new ArgumentNullException(nameof(context));
         if (string.IsNullOrWhiteSpace(reference)) throw new ArgumentNullException(nameof(reference));

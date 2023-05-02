@@ -10,14 +10,3 @@ namespace Cake.GitHub.Endpoints
     {
     }
 }
-
-namespace Cake.GitHub.Endpoints.Authentication
-{
-    /// <summary>
-    /// This namespace contain types used for Generating a GitHub App Installation Token
-    /// </summary>
-    [CompilerGenerated]
-    internal class NamespaceDoc
-    {
-    }
-}

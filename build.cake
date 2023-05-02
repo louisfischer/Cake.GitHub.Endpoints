@@ -1,13 +1,13 @@
 #addin "nuget:?package=Cake.MinVer&version=3.0.0"
 #addin "nuget:?package=Cake.Args&version=3.0.0"
 
-var target       = ArgumentOrDefault<string>("Target") ?? "Pack";
+var target       = ArgumentOrDefault<string>("Target") ?? "Default";
 var buildVersion = MinVer(s => s.WithTagPrefix("v").WithDefaultPreReleasePhase("preview"));
 
 Task("Clean")
     .Does(() =>
 {
-    CleanDirectories("./artifact/**");
+    EnsureDirectoryDoesNotExist("./artifact/");
     CleanDirectories("./**/^{bin,obj}");
 });
 
@@ -15,17 +15,17 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    DotNetRestore("./Cake.MinVer.sln", new DotNetRestoreSettings
+    DotNetRestore("./Cake.GitHub.Endpoints.sln", new DotNetRestoreSettings
     {
         LockedMode = true,
     });
 });
 
 Task("Build")
-    .IsDependentOn("restore")
+    .IsDependentOn("Restore")
     .DoesForEach(new[] { "Debug", "Release" }, (configuration) =>
 {
-    DotNetBuild("./Cake.MinVer.sln", new DotNetBuildSettings
+    DotNetBuild("./Cake.GitHub.Endpoints.sln", new DotNetBuildSettings
     {
         Configuration = configuration,
         NoRestore = true,
@@ -40,31 +40,11 @@ Task("Build")
     });
 });
 
-Task("Test")
+Task("Pack")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    var settings = new DotNetTestSettings
-    {
-        Configuration = "Release",
-        NoRestore = true,
-        NoBuild = true,
-    };
-
-    var projectFiles = GetFiles("./test/**/*.csproj");
-    foreach (var file in projectFiles)
-    {
-        DotNetTest(file.FullPath, settings);
-    }
-});
-
-Task("Pack")
-    .IsDependentOn("test")
-    .Does(() =>
-{
-    var releaseNotes = $"https://github.com/cake-contrib/Cake.MinVer/releases/tag/v{buildVersion.Version}";
-
-    DotNetPack("./src/Cake.MinVer/Cake.MinVer.csproj", new DotNetPackSettings
+    DotNetPack("./src/Cake.GitHub.Endpoints/Cake.GitHub.Endpoints.csproj", new DotNetPackSettings
     {
         Configuration = "Release",
         NoRestore = true,
@@ -73,23 +53,24 @@ Task("Pack")
         MSBuildSettings = new DotNetMSBuildSettings
         {
             Version = buildVersion.Version,
-            PackageReleaseNotes = releaseNotes,
-        },
+            PackageReleaseNotes =  $"https://github.com/cake-contrib/Cake.GitHub.Endpoints/releases/tag/v{buildVersion.Version}"
+        }
     });
 });
 
 Task("Push")
     .IsDependentOn("Pack")
+    .WithCriteria(() => ArgumentOrDefault<bool>("NUGET_PUSH"))
     .Does(context =>
 {
-    var url =  context.EnvironmentVariable("NUGET_URL");
+    var url = context.ArgumentOrDefault<string>("NUGET_URL");
     if (string.IsNullOrWhiteSpace(url))
     {
         context.Information("No NuGet URL specified. Skipping publishing of NuGet packages");
         return;
     }
 
-    var apiKey =  context.EnvironmentVariable("NUGET_API_KEY");
+    var apiKey = context.ArgumentOrDefault<string>("NUGET_API_KEY");
     if (string.IsNullOrWhiteSpace(apiKey))
     {
         context.Information("No NuGet API key specified. Skipping publishing of NuGet packages");
@@ -105,5 +86,16 @@ Task("Push")
     foreach (var nugetPackageFile in GetFiles("./artifact/nuget/*.nupkg"))
         DotNetNuGetPush(nugetPackageFile.FullPath, nugetPushSettings);
 });
+
+Task("Publish")
+    .IsDependentOn("Push")
+    .WithCriteria(() => GetFiles("./artifact/nuget/**/*")?.Count > 0)
+    .WithCriteria(() => GitHubActions.IsRunningOnGitHubActions)
+    .WithCriteria(() => string.Equals("refs/heads/main", GitHubActions.Environment.Workflow.Ref, StringComparison.OrdinalIgnoreCase) || GitHubActions.Environment.Workflow.Ref.StartsWith("refs/tags/", StringComparison.OrdinalIgnoreCase))
+    .Does(async () =>
+        await GitHubActions.Commands.UploadArtifact(Directory("./artifact/nuget"), $"Cake.GitHub.Endpoints.{buildVersion.Version}"));
+
+Task("Default")
+    .IsDependentOn("Publish");
 
 RunTarget(target);

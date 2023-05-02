@@ -19,7 +19,6 @@ end_of_line = lf
 [*.{dotsettings}]
 end_of_line = lf
 
-
 # CS1658: Warning is overriding an error
 dotnet_diagnostic.CS1658.severity = none
 
@@ -28,6 +27,3 @@ dotnet_diagnostic.CS1584.severity = none
 
 [*.verified.txt]
 end_of_line = lf
-
-dotnet_diagnostic.CS1658.severity = none
-dotnet_diagnostic.CS1584.severity = none
