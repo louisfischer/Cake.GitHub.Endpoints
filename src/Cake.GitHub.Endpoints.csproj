@@ -1,0 +1,79 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+    <AssemblyName>Cake.GitHub.Endpoints</AssemblyName>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <GenerateAssemblyVersionAttribute>true</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>true</GenerateAssemblyFileVersionAttribute>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <DebugType>portable</DebugType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+
+    <NoWarn>$(NoWarn);NU5048</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+	  <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Cake.GitHub.Endpoints</PackageId>
+    <Version>0.0.1-local</Version>
+    <Authors>cake-contrib</Authors>
+    <Company>cake-contrib</Company>
+    <Description>Cake add-in that makes GitHub Endpoints (API) available as a tool in Cake.</Description>
+    <Copyright>Copyright © 2023-$([System.DateTime]::Now.Year) Cake Contributions - Provided under the MIT License</Copyright>
+    <PackageTags>cake;github;cake-addin;cake-build;cake-contrib;addin;script;build;cake-contrib;</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>images\icon.png</PackageIcon>
+    <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/addin/cake-contrib-addin-medium.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/cake-contrib/Cake.GitHub.Endpoints</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/cake-contrib/Cake.GitHub.Endpoints/releases</PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/cake-contrib/Cake.GitHub.Endpoints.git</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cake.Common" Version="3.0.0" PrivateAssets="All" />
+    <PackageReference Include="Cake.Core" Version="3.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Include="JWT" Version="10.0.2" />
+    <PackageReference Include="Octokit" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\assets\cake-addin.png" Pack="true" Visible="false" PackagePath="images\icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Cake.Common" />
+    <Using Include="Cake.Common.IO" />
+    <Using Include="Cake.Common.Net" />
+    <Using Include="Cake.Common.Tools.Command" />
+    <Using Include="Cake.Core" />
+    <Using Include="Cake.Core.Annotations" />
+    <Using Include="Cake.Core.Diagnostics" />
+    <Using Include="Cake.Core.IO" />
+    <Using Include="Cake.Core.Tooling" />
+    <Using Include="Cake.GitHub.Endpoints.Constants">
+      <Static>True</Static>
+    </Using>
+    <Using Include="System.IO.Path">
+      <Alias>PathUtilities</Alias>
+    </Using>
+    <Using Include="System.Reflection" />
+    <Using Include="Octokit" />
+    <Using Include="JWT.Algorithms" />
+    <Using Include="JWT.Builder" />
+    <Using Include="System.Security.Cryptography" />
+    <Using Include="System.Runtime.Serialization" />
+    <Using Include="System.Text" />
+  </ItemGroup>
+
+
+</Project>

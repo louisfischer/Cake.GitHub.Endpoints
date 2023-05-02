@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.GitHub.Endpoints", "src\Cake.GitHub.Endpoints.csproj", "{C9CE6605-ED83-4111-B229-4840BBA788DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D4689364-2A99-4909-99C3-2287C4399E4D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		build.cake = build.cake
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9CE6605-ED83-4111-B229-4840BBA788DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9CE6605-ED83-4111-B229-4840BBA788DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9CE6605-ED83-4111-B229-4840BBA788DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9CE6605-ED83-4111-B229-4840BBA788DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99AD854F-EC72-42EB-964C-7BA616470386}
+	EndGlobalSection
+EndGlobal
