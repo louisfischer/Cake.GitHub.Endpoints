@@ -101,6 +101,30 @@ public static class GitHubEndpointsPullRequestAliases
     public static Task<bool> GitHubPullRequestMergeStatus(this IGitHubEndpointContext context, int number) => context.GitHubClient().PullRequest.Merged(context.Owner, context.RepoName, number);
 
     /// <summary>
+    /// Locks an issue for the specified repository. Issue owners and users with push access can lock an issue or pull request's conversation.
+    /// </summary>
+    /// <param name="context">The GitHubBuildContext</param>
+    /// <param name="number">The Pull request number.</param>
+    /// <param name="lockReason">The reason for locking the issue</param>
+    /// <remarks>
+    ///  API: <seealso href="https://developer.github.com/v3/issues/#lock-an-issue">https://developer.github.com/v3/issues/#lock-an-issue</seealso>
+    /// </remarks>
+    public static Task GitHubPullRequestLock(this IGitHubEndpointContext context, int number, LockReason? lockReason = null)
+        => context.GitHubClient().PullRequest.LockUnlock.Lock(context.Owner, context.RepoName, number, lockReason);
+
+    /// <summary>
+    /// Unlocks an issue for the specified repository. Issue owners and users with push access can unlock an issue or pull request's conversation.
+    /// </summary>
+    /// <param name="context">The GitHubBuildContext</param>
+    /// <param name="number">The Pull request number.</param>
+    /// <remarks>
+    ///  API: <seealso href="https://developer.github.com/v3/issues/#unlock-an-issue">https://developer.github.com/v3/issues/#unlock-an-issue</seealso>
+    /// </remarks>
+    public static Task GitHubPullRequestUnlock(this IGitHubEndpointContext context, int number)
+        => context.GitHubClient().PullRequest.LockUnlock.Unlock(context.Owner, context.RepoName, number);
+
+
+    /// <summary>
     /// Gets a single pull request review by ID.
     /// </summary>
     /// <param name="context">The GitHubBuildContext</param>
@@ -110,7 +134,7 @@ public static class GitHubEndpointsPullRequestAliases
     /// <remarks>
     ///  API: <seealso href="https://developer.github.com/v3/pulls/reviews/#get-a-single-review/">https://developer.github.com/v3/pulls/reviews/#get-a-single-review</seealso>
     /// </remarks>
-    public static Task<PullRequestReview> GitHubPullRequest(this IGitHubEndpointContext context, int number, long reviewId)
+    public static Task<PullRequestReview> GitHubPullRequestReview(this IGitHubEndpointContext context, int number, long reviewId)
         => context.GitHubClient().PullRequest.Review.Get(context.Owner, context.RepoName, number, reviewId);
 
     /// <summary>
@@ -122,7 +146,7 @@ public static class GitHubEndpointsPullRequestAliases
     /// <remarks>
     ///  API: <seealso href="https://developer.github.com/v3/pulls/reviews/#list-reviews-on-a-pull-request">https://developer.github.com/v3/pulls/reviews/#list-reviews-on-a-pull-request</seealso>
     /// </remarks>
-    public static Task<IReadOnlyList<PullRequestReview>> GitHubPullRequestAll(this IGitHubEndpointContext context, int number)
+    public static Task<IReadOnlyList<PullRequestReview>> GitHubPullRequestReviewAll(this IGitHubEndpointContext context, int number)
         => context.GitHubClient().PullRequest.Review.GetAll(context.Owner, context.RepoName, number);
 
     /// <summary>
