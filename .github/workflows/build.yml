@@ -1,7 +1,6 @@
 name: Build
 
 on:
-  pull_request:
   workflow_dispatch:
     inputs:
         target:
@@ -34,7 +33,7 @@ on:
                 - Normal
                 - Verbose
                 - Diagnostic
-  push:
+  pull_request:
     branches:
       - "**"
     tags:
