@@ -29,7 +29,7 @@ public static class GitHubEndpointsGitBlobAliases
     /// <remarks>
     ///  API: <seealso href="http://developer.github.com/v3/git/blobs/#create-a-blob">http://developer.github.com/v3/git/blobs/#create-a-blob</seealso>
     /// </remarks>
-    public static Task<BlobReference> GitHubGitTagCreate(this IGitHubEndpointContext context, string content, EncodingType encoding) =>
+    public static Task<BlobReference> GitHubGitBlobCreate(this IGitHubEndpointContext context, string content, EncodingType encoding) =>
         context.GitHubClient().Git.Blob.Create(context.Owner, context.RepoName, new NewBlob
         {
              Content = content,
