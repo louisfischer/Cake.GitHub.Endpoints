@@ -73,6 +73,6 @@ jobs:
             verbosity: ${{ inputs.logLevel || 'Diagnostic' }}
             cake-version: tool-manifest
             arguments: |
-                NUGET_PUSH: ${{ inputs.pushToNuget || true }}
+                NUGET_PUSH: ${{ inputs.pushToNuget || false }}
                 NUGET_URL: ${{ secrets.NUGET_URL }}
                 NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
