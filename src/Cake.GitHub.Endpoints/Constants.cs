@@ -6,7 +6,7 @@ internal static class Constants
     {
         public static class Values
         {
-            public const string UserAgent = "Cake GitHub Endpoints Client";
+            public const string UserAgent = "cake-gh-endpoints";
         }
     }
 
