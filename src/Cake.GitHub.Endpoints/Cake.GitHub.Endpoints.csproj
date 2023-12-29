@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <LangVersion>11</LangVersion>
+    <LangVersion>latest</LangVersion>
     <NoWarn>$(NoWarn);NU5048;CS8032</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <TreatSpecificWarningsAsErrors />
@@ -53,6 +53,7 @@
   <ItemGroup>
     <PackageReference Include="Cake.Common" Version="4.0.0" PrivateAssets="All" />
     <PackageReference Include="Cake.Core" Version="4.0.0" PrivateAssets="All" />
+    <PackageReference Include="Cake.Http" Version="4.0.0" />
     <PackageReference Include="Costura.Fody" Version="5.8.0-alpha0098" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="JWT" Version="10.1.1" />

@@ -21,4 +21,16 @@ internal static class Constants
             }
         }
     }
+
+    public static class GraphQL
+    {
+        public const string ApiUrl = "https://api.github.com/graphql";
+
+        #region Mutations
+        public static class Mutations
+        {
+            public const string enablePullRequestAutoMerge = "mutation PullRequestAutoMerge { enablePullRequestAutoMerge(input: {pullRequestId: \"{0}\", mergeMethod: {1}}) { clientMutationId } }";
+        }
+        #endregion
+    }
 }
