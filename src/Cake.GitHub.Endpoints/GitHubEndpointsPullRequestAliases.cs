@@ -1,4 +1,6 @@
-﻿namespace Cake.GitHub.Endpoints;
+﻿using Cake.Http;
+
+namespace Cake.GitHub.Endpoints;
 
 /// <summary>
 /// Contains functionality for working with GitHub Pull Requests API
@@ -84,10 +86,36 @@ public static class GitHubEndpointsPullRequestAliases
     /// <param name="message">The message that will be used for the merge commit (optional)</param>
     /// <returns><see cref="PullRequestMerge"/></returns>
     /// <remarks>
-    ///  API: <seealso href="http://developer.github.com/v3/pulls/#merge-a-pull-request-merge-buttontrade">http://developer.github.com/v3/pulls/#merge-a-pull-request-merge-buttontrade</seealso>
+    ///  API: <seealso href="http://developer.github.com/v3/pulls/#merge-a-pull-request-merge-buttontrade">http://developer.github.com/v3/pulls/#merge-a-pull-request-merge-buttontrade"></seealso>
     /// </remarks>
     public static Task<PullRequestMerge> GitHubPullRequestMerge(this IGitHubEndpointContext context, int number, string? title = null, string? message = null)
         => context.GitHubClient().PullRequest.Merge(context.Owner, context.RepoName, number, new MergePullRequest { MergeMethod = PullRequestMergeMethod.Squash, CommitTitle = title, CommitMessage = message });
+
+    /// <summary>
+    /// Enable the default auto-merge on a pull request
+    /// </summary>
+    /// <param name="context">The GitHubBuildContext</param>
+    /// <param name="number">The pull request number.</param>
+    /// <param name="mergeMethod">The merge method to use.</param>
+    /// <returns><see cref="PullRequest"/></returns>
+    /// <remarks>
+    /// GraphQL API: <seealso href="https://docs.github.com/en/graphql/reference/mutations#enablepullrequestautomerge">https://docs.github.com/en/graphql/reference/mutations#enablepullrequestautomerge</seealso>
+    /// </remarks>
+    public static async Task<PullRequest> GitHubPullRequestAutoMerge(this IGitHubEndpointContext context, int number, PullRequestMergeMethod mergeMethod = PullRequestMergeMethod.Squash)
+    {
+        var pr = await GitHubPullRequest(context, number) ?? throw new ArgumentException($"Pull request {number} not found");
+
+        await context.HttpPostAsync(GraphQL.ApiUrl, settings =>
+        {
+            settings.UseBearerAuthorization(context.GitHubToken)
+                    .SetRequestBody($"mutation PullRequestAutoMerge {{ enablePullRequestAutoMerge(input: {{pullRequestId: \"{pr.NodeId}\", mergeMethod: {mergeMethod.ToString().ToUpperInvariant()}}}) {{ clientMutationId }}}}")
+                    .SetContentType("application/json");
+        });
+
+        return pr;
+    }
+
+    //=> context.GitHubClient().PullRequest.Merge(context.Owner, context.RepoName, number, new MergePullRequest { MergeMethod = PullRequestMergeMethod.Squash, CommitTitle = title, CommitMessage = message });
 
     /// <summary>
     /// Get the pull request merge status.
@@ -266,3 +294,4 @@ public static class GitHubEndpointsPullRequestAliases
         return context.GitHubClient().PullRequest.ReviewRequest.Delete(context.Owner, context.RepoName, number, new PullRequestReviewRequest(reviewers, teamReviewers));
     }
 }
+
