@@ -108,14 +108,15 @@ public static class GitHubEndpointsPullRequestAliases
         await context.HttpPostAsync(GraphQL.ApiUrl, settings =>
         {
             settings.UseBearerAuthorization(context.GitHubToken)
-                    .SetRequestBody($"mutation PullRequestAutoMerge {{ enablePullRequestAutoMerge(input: {{pullRequestId: \"{pr.NodeId}\", mergeMethod: {mergeMethod.ToString().ToUpperInvariant()}}}) {{ clientMutationId }}}}")
-                    .SetContentType("application/json");
+                    .SetJsonRequestBody(new
+                    {
+                        query = @"mutation PullRequestAutoMerge($pullRequestId: ID!, $mergeMethod: PullRequestMergeMethod) { enablePullRequestAutoMerge(input: { pullRequestId: $pullRequestId, mergeMethod: $mergeMethod }) { actor { login } clientMutationId pullRequest { id } }}",
+                        variables = new { pullRequestId = pr.NodeId, mergeMethod = mergeMethod.ToString().ToUpperInvariant() }
+                    });
         });
 
-        return pr;
+        return await GitHubPullRequest(context, number);
     }
-
-    //=> context.GitHubClient().PullRequest.Merge(context.Owner, context.RepoName, number, new MergePullRequest { MergeMethod = PullRequestMergeMethod.Squash, CommitTitle = title, CommitMessage = message });
 
     /// <summary>
     /// Get the pull request merge status.
