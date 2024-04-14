@@ -61,6 +61,7 @@ Task("Pack")
 Task("Push")
     .IsDependentOn("Pack")
     .WithCriteria(() => ArgumentOrDefault<bool>("NUGET_PUSH"))
+    .WithCriteria(() => GitHubActions.Environment.Workflow.Ref.StartsWith("refs/tags/", StringComparison.OrdinalIgnoreCase))
     .Does(context =>
 {
     var url = context.ArgumentOrDefault<string>("NUGET_URL");
@@ -91,7 +92,7 @@ Task("Publish")
     .IsDependentOn("Push")
     .WithCriteria(() => GetFiles("./artifact/nuget/**/*")?.Count > 0)
     .WithCriteria(() => GitHubActions.IsRunningOnGitHubActions)
-    .WithCriteria(() => string.Equals("refs/heads/main", GitHubActions.Environment.Workflow.Ref, StringComparison.OrdinalIgnoreCase) || GitHubActions.Environment.Workflow.Ref.StartsWith("refs/tags/", StringComparison.OrdinalIgnoreCase))
+    .WithCriteria(() => string.Equals("refs/heads/main", GitHubActions.Environment.Workflow.Ref, StringComparison.OrdinalIgnoreCase))
     .Does(async () =>
         await GitHubActions.Commands.UploadArtifact(Directory("./artifact/nuget"), $"Cake.GitHub.Endpoints.{buildVersion.Version}"));
 
