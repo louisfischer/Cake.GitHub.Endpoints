@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <AssemblyName>Cake.GitHub.Endpoints</AssemblyName>
     <AssemblyVersion>0.0.1.0</AssemblyVersion>
     <GenerateAssemblyVersionAttribute>true</GenerateAssemblyVersionAttribute>
@@ -73,6 +73,7 @@
     <Using Include="Cake.Core.Annotations" />
     <Using Include="Cake.Core.Diagnostics" />
     <Using Include="Cake.Core.IO" />
+    <Using Include="Octokit.Models.Response"/>
     <Using Include="Cake.Core.Tooling" />
     <Using Include="Cake.GitHub.Endpoints.Constants">
       <Static>True</Static>
