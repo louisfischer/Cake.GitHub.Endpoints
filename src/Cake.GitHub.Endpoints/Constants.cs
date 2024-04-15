@@ -10,6 +10,11 @@ internal static class Constants
         }
     }
 
+    public static class Options
+    {
+        public static readonly ApiOptions DefaultApiOptions = new ApiOptions { PageSize = 100 };
+    }
+
     public static class Repos
     {
         public static class Contents

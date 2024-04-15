@@ -1,7 +1,7 @@
 #addin "nuget:?package=Cake.MinVer&version=3.0.0"
 #addin "nuget:?package=Cake.Args&version=3.0.0"
 
-var target       = ArgumentOrDefault<string>("Target") ?? "Default";
+var target = ArgumentOrDefault<string>("Target") ?? "Default";
 var buildVersion = MinVer(s => s.WithTagPrefix("v").WithDefaultPreReleasePhase("preview"));
 
 Task("Clean")
@@ -53,7 +53,7 @@ Task("Pack")
         MSBuildSettings = new DotNetMSBuildSettings
         {
             Version = buildVersion.Version,
-            PackageReleaseNotes =  $"https://github.com/cake-contrib/Cake.GitHub.Endpoints/releases/tag/v{buildVersion.Version}"
+            PackageReleaseNotes = $"https://github.com/cake-contrib/Cake.GitHub.Endpoints/releases/tag/v{buildVersion.Version}"
         }
     });
 });
@@ -91,7 +91,7 @@ Task("Publish")
     .IsDependentOn("Push")
     .WithCriteria(() => GetFiles("./artifact/nuget/**/*")?.Count > 0)
     .WithCriteria(() => GitHubActions.IsRunningOnGitHubActions)
-    .WithCriteria(() => string.Equals("refs/heads/main", GitHubActions.Environment.Workflow.Ref, StringComparison.OrdinalIgnoreCase) || GitHubActions.Environment.Workflow.Ref.StartsWith("refs/tags/", StringComparison.OrdinalIgnoreCase))
+    .WithCriteria(() => string.Equals("refs/heads/main", GitHubActions.Environment.Workflow.Ref, StringComparison.OrdinalIgnoreCase))
     .Does(async () =>
         await GitHubActions.Commands.UploadArtifact(Directory("./artifact/nuget"), $"Cake.GitHub.Endpoints.{buildVersion.Version}"));
 
