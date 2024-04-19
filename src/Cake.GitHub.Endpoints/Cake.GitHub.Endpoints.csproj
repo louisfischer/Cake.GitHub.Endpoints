@@ -57,7 +57,7 @@
     <PackageReference Include="Costura.Fody" Version="5.8.0-alpha0098" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="JWT" Version="10.1.1" />
-    <PackageReference Include="Octokit" Version="11.0.0" />
+    <PackageReference Include="Octokit" Version="11.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -73,7 +73,7 @@
     <Using Include="Cake.Core.Annotations" />
     <Using Include="Cake.Core.Diagnostics" />
     <Using Include="Cake.Core.IO" />
-    <Using Include="Octokit.Models.Response"/>
+    <Using Include="Octokit.Models.Response" />
     <Using Include="Cake.Core.Tooling" />
     <Using Include="Cake.GitHub.Endpoints.Constants">
       <Static>True</Static>
