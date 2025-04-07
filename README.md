@@ -9,7 +9,7 @@ This plugin is a set of convience Cake aliases for [GitHub API Endpoints](https:
 ```
 ### Cake Frosting Project
 ```xml
-<PackageReference Include="Cake.GitHub.Endpoints" Version="0.4.1" />
+<PackageReference Include="Cake.GitHub.Endpoints" Version="2.0.0" />
 ```
 
 ## Discussion
