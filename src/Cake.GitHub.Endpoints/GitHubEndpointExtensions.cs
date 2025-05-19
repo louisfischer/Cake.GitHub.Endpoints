@@ -1,6 +1,9 @@
 ﻿namespace Cake.GitHub.Endpoints;
 
-internal static class GitHubEndpointExtensions
+/// <summary>
+/// Extension methods for <see cref="IGitHubEndpointContext"/>.
+/// </summary>
+public static class GitHubEndpointExtensions
 {
     /// <summary>
     ///A Client for the GitHub API v3. You can read more about the API here: http://developer.github.com.

@@ -53,7 +53,7 @@ Task("Pack")
         MSBuildSettings = new DotNetMSBuildSettings
         {
             Version = buildVersion.Version,
-            PackageReleaseNotes = $"https://github.com/cake-contrib/Cake.GitHub.Endpoints/releases/tag/v{buildVersion.Version}"
+            PackageReleaseNotes = $"https://github.com/louisfischer/Cake.GitHub.Endpoints/releases/tag/v{buildVersion.Version}"
         }
     });
 });
