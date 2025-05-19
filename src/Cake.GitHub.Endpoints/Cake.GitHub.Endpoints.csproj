@@ -36,18 +36,18 @@
   <PropertyGroup>
     <PackageId>Cake.GitHub.Endpoints</PackageId>
     <Version>0.0.1-local</Version>
-    <Authors>cake-contrib</Authors>
-    <Company>cake-contrib</Company>
+    <Authors>louisfischer</Authors>
+    <Company>louisfischer</Company>
     <Description>Cake add-in that makes GitHub Endpoints (API) available as a tool in Cake.</Description>
     <Copyright>Copyright © 2023-$([System.DateTime]::Now.Year) Cake Contributions - Provided under the MIT License</Copyright>
     <PackageTags>cake;github;cake-addin;cake-build;cake-contrib;addin;script;build;cake-contrib;</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>images\icon.png</PackageIcon>
     <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/addin/cake-contrib-addin-medium.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/cake-contrib/Cake.GitHub.Endpoints</PackageProjectUrl>
-    <PackageReleaseNotes>https://github.com/cake-contrib/Cake.GitHub.Endpoints/releases</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/louisfischer/Cake.GitHub.Endpoints</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/louisfischer/Cake.GitHub.Endpoints/releases</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/cake-contrib/Cake.GitHub.Endpoints.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/louisfischer/Cake.GitHub.Endpoints.git</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
