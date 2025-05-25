@@ -56,7 +56,6 @@
     <PackageReference Include="Cake.Http" Version="4.0.0" />
     <PackageReference Include="Costura.Fody" Version="6.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="JWT" Version="11.0.0" />
     <PackageReference Include="Octokit" Version="14.0.0" />
   </ItemGroup>
 
@@ -83,11 +82,10 @@
     </Using>
     <Using Include="System.Reflection" />
     <Using Include="Octokit" />
-    <Using Include="JWT.Algorithms" />
-    <Using Include="JWT.Builder" />
     <Using Include="System.Security.Cryptography" />
     <Using Include="System.Runtime.Serialization" />
     <Using Include="System.Text" />
+    <Using Include="System.Text.Json" />
   </ItemGroup>
 
 
