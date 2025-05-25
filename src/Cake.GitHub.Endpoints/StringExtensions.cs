@@ -11,5 +11,10 @@ internal static class StringExtensions
     /// </summary>
     /// <param name="value">Base64 string to sanitize</param>
     /// <returns>Sanitized base64 string</returns>
-    public static string Base64Sanitize(this string value) => value?.TrimEnd('=').Replace('+', '-').Replace('/', '_') ?? string.Empty;   
+    public static string Base64Sanitize(this string value) => value?
+        .Replace("\r", "")
+        .Replace("\n", "")
+        .TrimEnd('=')
+        .Replace('+', '-')
+        .Replace('/', '_') ?? string.Empty;
 }
