@@ -53,7 +53,7 @@
   <ItemGroup>
     <PackageReference Include="Cake.Common" Version="5.0.0" PrivateAssets="All" />
     <PackageReference Include="Cake.Core" Version="5.0.0" PrivateAssets="All" />
-    <PackageReference Include="Cake.Http" Version="4.0.0" />
+    <PackageReference Include="Cake.Http" Version="5.0.0" />
     <PackageReference Include="Costura.Fody" Version="6.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="Octokit" Version="14.0.0" />
